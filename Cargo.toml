@@ -1,6 +1,6 @@
 [package]
 name = "rtmidi"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Rob Hardwick <robhardwick@gmail.com>"]
 edition = "2018"
 description = "Safe wrapper for RtMidi, realtime MIDI input/output"
@@ -11,5 +11,5 @@ categories = ["multimedia::audio", "api-bindings"]
 license = "MIT"
 
 [build-dependencies]
-bindgen = "0.57.0"
-pkg-config = "0.3.19"
+bindgen = "0.69.4"
+pkg-config = "0.3.30"
