@@ -13,16 +13,16 @@ mod lib {
     pub fn create_callback<F: Fn(f64, &[u8])>(
         f: F,
     ) -> (
-        unsafe extern "C" fn(f64, *const u8, u64, *mut c_void),
+        unsafe extern "C" fn(f64, *const u8, usize, *mut c_void),
         *mut F,
     ) {
         unsafe extern "C" fn trampoline<F: Fn(f64, &[u8])>(
             timestamp: f64,
             data: *const u8,
-            size: u64,
+            size: usize,
             func: *mut c_void,
         ) {
-            let messages = slice::from_raw_parts(data, size as usize);
+            let messages = slice::from_raw_parts(data, size);
             (*(func as *mut F))(timestamp, messages)
         }
         (trampoline::<F>, Box::into_raw(Box::new(f)))

@@ -179,7 +179,7 @@ impl RtMidiIn {
     /// message is indicated by a non-zero vector size. An exception is thrown if an error occurs
     /// during message retrieval or an input connection was not previously established.
     pub fn message(&self) -> Result<(f64, Vec<u8>), RtMidiError> {
-        let mut length = 0u64;
+        let mut length = 0usize;
         let mut message = Vec::with_capacity(1024);
         let ptr = message.as_mut_ptr();
         let timestamp = unsafe { ffi::rtmidi_in_get_message(self.0, ptr, &mut length) };
