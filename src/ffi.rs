@@ -3,7 +3,6 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
 
-#[cfg(rtmidi_version = "v4_0_0")]
 mod lib {
     use std::ffi::c_void;
     use std::slice;
@@ -29,7 +28,6 @@ mod lib {
     }
 }
 
-#[cfg(rtmidi_version = "v4_0_0")]
 pub use lib::*;
 
 #[cfg(rtmidi_version = "v3_0_0")]
