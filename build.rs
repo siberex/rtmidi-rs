@@ -2,7 +2,8 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    println!("cargo:rustc-link-search=/rtmidi");
+    println!("cargo:rustc-link-search=rtmidi");
+    println!("cargo:rerun-if-changed=rtmidi/");
     println!("cargo:rerun-if-changed=wrapper.h");
 
     let bindings = bindgen::Builder::default()
