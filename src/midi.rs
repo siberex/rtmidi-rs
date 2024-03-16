@@ -46,7 +46,10 @@ pub fn port_name<'a>(
     ptr: *mut ffi::RtMidiWrapper,
     port_number: RtMidiPort,
 ) -> Result<&'a str, RtMidiError> {
-    let port_name = unsafe { ffi::rtmidi_get_port_name(ptr, port_number) };
+    // NULL can be passed as bufOut parameter, and that will write the required buffer length in the bufLen.
+    let port_name: *mut std::os::raw::c_char = std::ptr::null_mut();
+    let buf_len: *mut std::os::raw::c_int = std::ptr::null_mut();
+    let _result = unsafe { ffi::rtmidi_get_port_name(ptr, port_number, port_name, buf_len) };
     match unsafe { Result::<(), RtMidiError>::from(*ptr) } {
         Ok(_) if port_name.is_null() => Err(RtMidiError::NullPointer),
         Ok(_) => {
